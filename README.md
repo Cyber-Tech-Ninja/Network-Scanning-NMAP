@@ -31,6 +31,11 @@ Aggressive scan
 Nmap has an aggressive mode that enables OS detection, version detection, script scanning, and traceroute. You can use the -A argument to perform an aggressive scan
 nmap -A <ip address>
 
+ARP scan
+nmap -PR -sn <ip address>
+arp-scan --localnet
+sudo arp-scan -I eth0 -l
+
 Scanning Multiple Hosts
 Nmap has the capability of scanning multiple hosts simultaneously. This feature comes in real handy when you are managing vast network infrastructure.
 You Can Scan Multiple Hosts Through Numerous Approaches:
@@ -56,6 +61,7 @@ PING SWEEP
 Ping sweep sends an ICMP packet to each possible IP address for the specified network. When it receives a response, it marks the IP address that responded as being alive. 
 
 nmap -sn <ip address ranges or subnet mask>
+nmap -PE -sn <ip address>
 
 If you specify the type of port, you can scan for information about a particular type of connection, for example for a TCP connection.
 nmap -p T:7777, 973 192.164.0.1
