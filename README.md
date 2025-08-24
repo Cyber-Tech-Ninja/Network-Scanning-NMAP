@@ -52,6 +52,11 @@ Port scanning is one of the most fundamental features of Nmap. You can scan for 
 Using the -p param to scan for a single port
 nmap -p 973 192.164.0.1
 
+PING SWEEP
+Ping sweep sends an ICMP packet to each possible IP address for the specified network. When it receives a response, it marks the IP address that responded as being alive. 
+
+nmap -sn <ip address ranges or subnet mask>
+
 If you specify the type of port, you can scan for information about a particular type of connection, for example for a TCP connection.
 nmap -p T:7777, 973 192.164.0.1
 
@@ -90,7 +95,23 @@ Nmap Scripting Engine
 Nmap Scripting Engine (NSE) is an incredibly powerful tool that you can use to write scripts and automate numerous networking features.
 You can find plenty of scripts distributed across Nmap, or write your own script based on  your  requirements.  You  can  even  modify  existing  scripts  using  the  Lua programming language (https://en.wikipedia.org/wiki/Lua_(programming_language).
 
+There are many categories available. Some useful categories include:
 
+safe:- Won't affect the target
+intrusive:- Not safe: likely to affect the target
+vuln:- Scan for vulnerabilities
+exploit:- Attempt to exploit a vulnerability
+auth:- Attempt to bypass authentication for running services (e.g. Log into an FTP server anonymously)
+brute:- Attempt to bruteforce credentials for running services
+discovery:- Attempt to query running services for further information about the network (e.g. query an SNMP server).
+
+Ok, so we know how to use the scripts in Nmap, but we don't yet know how to find these scripts.
+
+We have two options for this, which should ideally be used in conjunction with each other. The first is the page on the Nmap website (mentioned in the previous task) which contains a list of all official scripts. The second is the local storage on your attacking machine. Nmap stores its scripts on Linux at /usr/share/nmap/scripts. All of the NSE scripts are stored in this directory by default -- this is where Nmap looks for scripts when you specify them.
+
+There are two ways to search for installed scripts. One is by using the <cd /usr/share/nmap/scripts/script.db> <file script.db x head script.db> file. Despite the extension, this isn't actually a database so much as a formatted text file containing filenames and categories for each available script.
+
+The second way to search for scripts is quite simply to use the ls command. For example, we could get the same results as in the previous screenshot by using ls -l /usr/share/nmap/scripts/*ftp*
 
 
 
